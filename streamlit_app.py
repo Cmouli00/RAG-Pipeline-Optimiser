@@ -17,7 +17,7 @@ if st.button("Run Experiment"):
     if isinstance(evaluation_dict, str):
         evaluation_dict = json.loads(evaluation_dict)   
         
-    st.subheader(f"🏆 Winner: {str(evaluation_dict['winner'])}") 
+    st.subheader(f"Winner: {str(evaluation_dict['winner'])}") 
     st.write(str(evaluation_dict['analysis']))
     
     
