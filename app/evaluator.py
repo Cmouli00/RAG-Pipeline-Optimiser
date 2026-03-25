@@ -1,6 +1,7 @@
 import litellm
+import json
 
-def evaluate_results(question, pipeline_outputs):
+async def evaluate_results(question, pipeline_outputs):
     """
     pipeline_outputs: List of {'name': 'Small_Chunks', 'answer': '...', 'context': '...'}
     """
@@ -23,9 +24,12 @@ def evaluate_results(question, pipeline_outputs):
     }}
     """
     
-    response = litellm.completion(
+    response = await litellm.acompletion(
         model="ollama/phi3",
         messages=[{"role": "user", "content": prompt}],
         response_format={ "type": "json_object" }
     )
-    return response.choices[0].message.content
+
+    response_json = response.choices[0].message.content
+    return json.loads(response_json)
+    

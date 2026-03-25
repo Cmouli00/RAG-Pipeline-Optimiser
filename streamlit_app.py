@@ -21,9 +21,15 @@ if st.button("Run Experiment"):
     st.write(str(evaluation_dict['analysis']))
     
     
-    # Show side-by-side comparison
-    cols = st.columns(4)
+    cols = st.columns(len(data['results'])) 
+
     for i, res in enumerate(data['results']):
         with cols[i]:
             st.info(f"Strategy: {res['name']}")
-            st.text_area("Retrieved Context", res['context'], height=200)
+            
+            st.text_area(
+                "Retrieved Context", 
+                res['context'], 
+                height=200, 
+                key=f"context_area_{i}"  
+            )
